@@ -4,11 +4,11 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
-        render json: @users
+        render json: @users.to_json(except: [:password_digest])
     end
 
     def show
-        render json: @user
+        render json: @user.as_json(except: [:password_digest])
     end
 
     def create
@@ -34,8 +34,9 @@ class UsersController < ApplicationController
     end
 
     private
+
     def set_user
-        @user = User.find(params[:id]).as_json(except: [:password_digest])
+        @user = User.find(params[:id])
     end
 
     def user_params
