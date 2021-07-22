@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   
   resources :users 
+  resources :details
   
   post "/users/login", to: 'authentication#create'
   
