@@ -4,11 +4,11 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
-        render json: @users.to_json(except: [:password_digest])
+        render json: @users.to_json(include: :details, except: [:password_digest])
     end
 
     def show
-        render json: @user.as_json(except: [:password_digest])
+        render json: @user.as_json(include: :details, except: [:password_digest])
     end
 
     def create
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
     def update
         if @user.update(user_params)
-            render json: @user
+            render json: @user.as_json(include: :details, except: [:password_digest])
         else
             render json: @user.errors, status: :unprocessable_entity
         end
@@ -31,6 +31,15 @@ class UsersController < ApplicationController
 
     def destroy
         @user.destroy
+        
+        if @user.destroy
+            render json: { 
+                status: "user #{@user.id} deleted",
+                name: "#{@user.name} no longer is in the system"
+            }
+        else
+            render json: @user.errors, status: :unprocessable_entity
+        end
     end
 
     private
