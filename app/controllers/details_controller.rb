@@ -11,7 +11,7 @@ class DetailsController < ApplicationController
 
   # GET /details/1
   def show
-    render json: @detail.to_json(include: :user)
+    render json: @detail
   end
 
   # POST /details
