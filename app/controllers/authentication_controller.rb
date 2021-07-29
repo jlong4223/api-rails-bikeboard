@@ -4,13 +4,14 @@ class AuthenticationController < ApplicationController
         user = User.find_by(email: params[:email])
         
         if user && user.authenticate(params[:password])
-        # encoding the token with id, name, email
+        # encoding the token with id, name, email, role, details_id
          auth_token = JsonWebToken.encode(
                 {
                     user_id: user.id, 
                     name: user.name, 
                     email: user.email,
-                    role: user.role
+                    role: user.role,
+                    details_id: user.details[0].id
                 }
             )
             
