@@ -12,7 +12,7 @@ class DetailsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create detail" do
     assert_difference('Detail.count') do
-      post details_url, params: { detail: { address: @detail.address, biker_type: @detail.biker_type, bio: @detail.bio, zip: @detail.zip } }, as: :json
+      post details_url, params: { detail: { address: @detail.address, biker_type: @detail.biker_type, bio: @detail.bio, zip_code: @detail.zip_code } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class DetailsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update detail" do
-    patch detail_url(@detail), params: { detail: { address: @detail.address, biker_type: @detail.biker_type, bio: @detail.bio, zip: @detail.zip } }, as: :json
+    patch detail_url(@detail), params: { detail: { address: @detail.address, biker_type: @detail.biker_type, bio: @detail.bio, zip_code: @detail.zip_code } }, as: :json
     assert_response 200
   end
 
